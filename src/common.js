@@ -125,10 +125,10 @@ export default class Helpers {
         const filename = path.replace(/^.*[\\\/]/, '').replace(/\?(.*)/, '');
         
         if(!CONFIG.AIE.TEMPORARY.import[path]) {
-          await Helpers.verifyPath("data", `worlds/${game.world.name}/adventures/${adventurePath}/${targetPath}`);
+          await Helpers.verifyPath("data", `worlds/${game.world.id}/adventures/${adventurePath}/${targetPath}`);
           const img = await zip.file(path).async("uint8array");
           const i = new File([img], filename);
-          await Helpers.UploadFile("data", `worlds/${game.world.name}/adventures/${adventurePath}/${targetPath}`, i, { bucket: null })
+          await Helpers.UploadFile("data", `worlds/${game.world.id}/adventures/${adventurePath}/${targetPath}`, i, { bucket: null })
           CONFIG.AIE.TEMPORARY.import[path] = true;
         } else {
           Helpers.logger.debug(`File already imported ${path}`);  
